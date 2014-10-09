@@ -21,6 +21,11 @@
     register: miniconda_venv_created
     with_items: miniconda_environments
 
+  - name: add any additional channels to miniconda
+    command: '{{ miniconda_path }}/bin/conda config --add channels {{ item }}'
+    when: miniconda_venv_created|success
+    with_items: miniconda_channels
+
   - name: update miniconda environment packages
     command: '{{ miniconda_path }}/bin/conda install --yes -n {{ item.name }} 
         {{ item.pkgs }}'

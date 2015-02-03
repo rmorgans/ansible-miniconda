@@ -3,12 +3,12 @@
   - name: download miniconda installer
     get_url:
       url={{ miniconda_installer.url }}/{{ miniconda_installer.file }}
-      dest=/var/tmp/{{ miniconda_installer.file }}
+      dest=/tmp/{{ miniconda_installer.file }}
       mode=0755
     register: miniconda_downloaded
 
   - name: install miniconda
-    command: '/var/tmp/{{ miniconda_installer.file }} -b -p {{ miniconda_path }}
+    command: '/tmp/{{ miniconda_installer.file }} -b -p {{ miniconda_path }}
         creates={{ miniconda_path }}'
     register: miniconda_installed
     when: miniconda_downloaded|success

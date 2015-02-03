@@ -26,6 +26,10 @@
     when: miniconda_venv_created|success
     with_items: miniconda_channels
 
+  - name: update miniconda global packages
+    command: '{{ miniconda_path }}/bin/conda install --yes 
+        {{ miniconda_global_pkgs }}'
+
   - name: update miniconda environment packages
     command: '{{ miniconda_path }}/bin/conda install --yes -n {{ item.name }} 
         {{ item.pkgs }}'
